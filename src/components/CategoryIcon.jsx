@@ -5,14 +5,14 @@
 import { FaComment, FaUpload, FaAt, FaHeart, FaUserPlus, FaCircle } from 'react-icons/fa'
 
 const CATEGORY_TO_ICON = {
-  comment: 'FaComment',
-  upload: 'FaUpload',
-  mention: 'FaAt',
-  like: 'FaHeart',
-  join: 'FaUserPlus',
+  comment: FaComment,
+  upload: FaUpload,
+  mention: FaAt,
+  like: FaHeart,
+  join: FaUserPlus,
 }
 
 export default function CategoryIcon({ category }) {
-  const IconComponent = CATEGORY_TO_ICON[category] || Icons.FaCircle
+  const IconComponent = CATEGORY_TO_ICON[category] || FaCircle
   return <IconComponent size={14} style={{ marginTop: 3 }} />
 }
