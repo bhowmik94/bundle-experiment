@@ -5,7 +5,8 @@ import { useMemo, useState } from 'react'
 import moment from 'moment'
 // Full lodash import: only debounce + groupBy are used, but grabbing the
 // whole library was the path of least resistance. Bloat decision #2.
-import _ from 'lodash'
+import debounce from 'lodash/debounce'
+import groupBy from 'lodash/groupby'
 import { mockActivities } from '../data/mockActivities'
 import CategoryIcon from '../components/CategoryIcon'
 
@@ -14,7 +15,7 @@ export default function Feed() {
   const [debouncedQuery, setDebouncedQuery] = useState('')
 
   const debouncedSetQuery = useMemo(
-    () => _.debounce((value) => setDebouncedQuery(value), 300),
+    () => debounce((value) => setDebouncedQuery(value), 300),
     []
   )
 
@@ -27,7 +28,7 @@ export default function Feed() {
     a.text.toLowerCase().includes(debouncedQuery.toLowerCase())
   )
 
-  const grouped = _.groupBy(filtered, (a) => moment(a.timestamp).format('YYYY-MM-DD'))
+  const grouped = groupBy(filtered, (a) => moment(a.timestamp).format('YYYY-MM-DD'))
 
   return (
     <div>
