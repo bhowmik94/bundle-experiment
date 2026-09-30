@@ -1,9 +1,12 @@
-# Bundle Experiment — "Team Activity Dashboard"
+# Bundle Experiment
 
 A deliberately minimal React + Vite app with four realistic bloat decisions
-baked in, meant as a testbed for a bundle-size-reduction experiment.
+baked in, meant as a testbed for a bundle-size-reduction experiment. Check the dev community article for a detailed breakdown of the whole experiment: (https://dev.to/sourav_bhowmik_73d35592ab/how-i-cut-a-react-apps-initial-bundle-by-89-58k2)
+
 
 ## Setup
+
+The main branch serves as the baseline version and the `fix/all-combined` branch is the final version with all the bundle reducer code combined.
 
 ```bash
 npm install
@@ -11,8 +14,7 @@ npm run build
 ```
 
 After the build, open `dist/stats.html` in a browser — that's the
-rollup-plugin-visualizer treemap showing exactly what's in your bundle.
-Screenshot it now, before making any changes. This is your baseline.
+rollup-plugin-visualizer treemap showing exactly what's in the bundle.
 
 Also record from the `vite build` terminal output:
 - total JS size (raw + the gzip figure Vite prints)
@@ -25,9 +27,7 @@ Also record from the `vite build` terminal output:
    or `date-fns`'s `formatDistanceToNow`.
 
 2. **Full `lodash` import in `src/pages/Feed.jsx`** — only `debounce` and
-   `groupBy` are used. Fix later: `import debounce from 'lodash/debounce'`
-   (or switch to `lodash-es`), and consider hand-rolling `groupBy` with
-   `reduce`.
+   `groupBy` are used. Fix later: `import debounce from 'lodash/debounce'`.
 
 3. **Whole icon set in `src/components/CategoryIcon.jsx`** — the icon name
    is data-driven (`category` comes from the mock API data), so it's
@@ -54,6 +54,3 @@ Repeat per fix, keeping a simple table of before/after numbers as you go.
 ```bash
 npm run dev
 ```
-
-Visit http://localhost:5173 — Feed, Dashboard, and Settings routes are
-in the nav bar.
